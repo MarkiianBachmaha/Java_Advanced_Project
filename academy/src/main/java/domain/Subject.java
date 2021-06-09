@@ -2,10 +2,24 @@ package domain;
 
 import java.util.List;
 
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "subject")
 public class Subject {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
+
 	private String name;
+
+	@ElementCollection
 	private List<Faculty> faculties;
 
 	public Subject() {
