@@ -2,17 +2,44 @@ package domain;
 
 import java.util.List;
 
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
+@Entity
+@Table(name = "faculty_registration")
 public class RegistrationFormFaculty {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
+
+	@ManyToOne()
+	@JoinColumn(name = "faculty_id", referencedColumnName = "id")
 	private Faculty faculty;
+
+	@ManyToOne()
+	@JoinColumn(name = "user_id", referencedColumnName = "id")
 	private User user;
+
+	@Transient
 	private String email;
+
+	@Transient
+	private int facultyId;
+
+	@ElementCollection
 	private List<Integer> marks;
 	private Integer sumMarks;
 
 	public RegistrationFormFaculty() {
-		;
+
 	}
 
 	public RegistrationFormFaculty(Faculty faculty, User user, List<Integer> marks) {
@@ -78,6 +105,14 @@ public class RegistrationFormFaculty {
 		this.sumMarks = sumMarks;
 	}
 
+	public int getFacultyId() {
+		return facultyId;
+	}
+
+	public void setFacultyId(int facultyId) {
+		this.facultyId = facultyId;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -130,6 +165,6 @@ public class RegistrationFormFaculty {
 	@Override
 	public String toString() {
 		return "RegistrationFormFaculty [id=" + id + ", faculty=" + faculty + ", user=" + user + ", email=" + email
-				+ ", sumMarks=" + sumMarks + "]";
+				+ ", facultyId=" + facultyId + ", marks=" + marks + ", sumMarks=" + sumMarks + "]";
 	}
 }

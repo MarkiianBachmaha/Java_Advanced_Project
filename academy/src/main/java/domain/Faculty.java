@@ -2,6 +2,8 @@ package domain;
 
 import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -17,7 +19,10 @@ public class Faculty {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
 
+	@Column(name = "name")
 	private String name;
+
+	@Column(name = "numberOfStudents")
 	private Integer numberOfStudents;
 
 	@ElementCollection

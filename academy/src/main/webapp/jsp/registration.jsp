@@ -18,13 +18,11 @@
 
 <title>Create an account</title>
 
-<link href="${contextPath}/resources/css/bootstrap.min.css"
-	rel="stylesheet">
+<link href="${contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">
 <link href="${contextPath}/resources/css/common.css" rel="stylesheet">
 </head>
 
 <body>
-
 	<div class="container">
 
 		<form:form method="POST" modelAttribute="userForm" class="form-signin">
