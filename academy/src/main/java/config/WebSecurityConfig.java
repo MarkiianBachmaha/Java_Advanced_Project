@@ -34,10 +34,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests().antMatchers("/").permitAll().antMatchers("/home")
-				.access("hasRole('USER') or hasRole('ADMINISTRATOR')").antMatchers("/show-entrants")
-				.access("hasRole('USER') or hasRole('ADMINISTRATOR')").antMatchers("/registration-at-faculty")
-				.access("hasRole('USER')").anyRequest().permitAll().and().formLogin().loginPage("/login")
-				.defaultSuccessUrl("/home").usernameParameter("email").passwordParameter("password").and().logout()
-				.logoutSuccessUrl("/login?logout").and().exceptionHandling().accessDeniedPage("/403").and().csrf();
+				.access("hasRole('USER') or hasRole('ADMINISTRATOR')").antMatchers("/show_entrants")
+				.access("hasRole('USER') or hasRole('ADMINISTRATOR')").antMatchers("/registration_at_faculty")
+				.access("hasRole('USER')").antMatchers("/admin_panel").access("hasRole('ADMINISTRATOR')")
+				.antMatchers("/add_faculty").access("hasRole('ADMINISTRATOR')").antMatchers("/logout")
+				.access("hasRole('USER') or hasRole('ADMINISTRATOR')").anyRequest().permitAll().and().formLogin()
+				.loginPage("/login").defaultSuccessUrl("/home").usernameParameter("email").passwordParameter("password")
+				.and().logout().logoutSuccessUrl("/login?logout").and().exceptionHandling().accessDeniedPage("/403")
+				.and().csrf();
 	}
 }

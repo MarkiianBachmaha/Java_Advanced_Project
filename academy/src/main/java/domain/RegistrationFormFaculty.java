@@ -2,6 +2,7 @@ package domain;
 
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -28,29 +29,33 @@ public class RegistrationFormFaculty {
 	@JoinColumn(name = "user_id", referencedColumnName = "id")
 	private User user;
 
+	@ElementCollection
+	private List<Integer> marks;
+
+	@Column(name = "upload_photo")
+	private String uploadPhoto;
+
+	@Column(name = "upload_document")
+	private String uploadDocument;
+
 	@Transient
 	private String email;
 
 	@Transient
 	private int facultyId;
 
-	@ElementCollection
-	private List<Integer> marks;
-	private Integer sumMarks;
-
 	public RegistrationFormFaculty() {
 
 	}
 
 	public RegistrationFormFaculty(Faculty faculty, User user, List<Integer> marks) {
-		super();
 		this.faculty = faculty;
 		this.user = user;
 		this.marks = marks;
 	}
 
 	public RegistrationFormFaculty(Integer id, Faculty faculty, User user, List<Integer> marks) {
-		super();
+		;
 		this.id = id;
 		this.faculty = faculty;
 		this.user = user;
@@ -81,14 +86,6 @@ public class RegistrationFormFaculty {
 		this.user = user;
 	}
 
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
 	public List<Integer> getMarks() {
 		return marks;
 	}
@@ -97,12 +94,28 @@ public class RegistrationFormFaculty {
 		this.marks = marks;
 	}
 
-	public Integer getSumMarks() {
-		return sumMarks;
+	public String getUploadPhoto() {
+		return uploadPhoto;
 	}
 
-	public void setSumMarks(Integer sumMarks) {
-		this.sumMarks = sumMarks;
+	public void setUploadPhoto(String uploadPhoto) {
+		this.uploadPhoto = uploadPhoto;
+	}
+
+	public String getUploadDocument() {
+		return uploadDocument;
+	}
+
+	public void setUploadDocument(String uploadDocument) {
+		this.uploadDocument = uploadDocument;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public int getFacultyId() {
@@ -119,8 +132,11 @@ public class RegistrationFormFaculty {
 		int result = 1;
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		result = prime * result + ((faculty == null) ? 0 : faculty.hashCode());
+		result = prime * result + facultyId;
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((sumMarks == null) ? 0 : sumMarks.hashCode());
+		result = prime * result + ((marks == null) ? 0 : marks.hashCode());
+		result = prime * result + ((uploadDocument == null) ? 0 : uploadDocument.hashCode());
+		result = prime * result + ((uploadPhoto == null) ? 0 : uploadPhoto.hashCode());
 		result = prime * result + ((user == null) ? 0 : user.hashCode());
 		return result;
 	}
@@ -144,15 +160,27 @@ public class RegistrationFormFaculty {
 				return false;
 		} else if (!faculty.equals(other.faculty))
 			return false;
+		if (facultyId != other.facultyId)
+			return false;
 		if (id == null) {
 			if (other.id != null)
 				return false;
 		} else if (!id.equals(other.id))
 			return false;
-		if (sumMarks == null) {
-			if (other.sumMarks != null)
+		if (marks == null) {
+			if (other.marks != null)
 				return false;
-		} else if (!sumMarks.equals(other.sumMarks))
+		} else if (!marks.equals(other.marks))
+			return false;
+		if (uploadDocument == null) {
+			if (other.uploadDocument != null)
+				return false;
+		} else if (!uploadDocument.equals(other.uploadDocument))
+			return false;
+		if (uploadPhoto == null) {
+			if (other.uploadPhoto != null)
+				return false;
+		} else if (!uploadPhoto.equals(other.uploadPhoto))
 			return false;
 		if (user == null) {
 			if (other.user != null)
@@ -164,7 +192,8 @@ public class RegistrationFormFaculty {
 
 	@Override
 	public String toString() {
-		return "RegistrationFormFaculty [id=" + id + ", faculty=" + faculty + ", user=" + user + ", email=" + email
-				+ ", facultyId=" + facultyId + ", marks=" + marks + ", sumMarks=" + sumMarks + "]";
+		return "RegistrationFormFaculty [id=" + id + ", faculty=" + faculty + ", user=" + user + ", marks=" + marks
+				+ ", uploadPhoto=" + uploadPhoto + ", uploadDocument=" + uploadDocument + ", email=" + email
+				+ ", facultyId=" + facultyId + "]";
 	}
 }

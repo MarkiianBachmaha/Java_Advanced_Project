@@ -13,7 +13,7 @@ public class EntrantsController {
 	@Autowired
 	private RegistrationAtFacultyService registrationAtFacultyService;
 
-	@GetMapping("/show-entrants")
+	@GetMapping("/show_entrants")
 	public ModelAndView showAllEntrants() {
 		return new ModelAndView("showRegistrations", "facultyRegistrations",
 				registrationAtFacultyService.showAllEntrants());

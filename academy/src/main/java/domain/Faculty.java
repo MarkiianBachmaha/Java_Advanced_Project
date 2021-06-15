@@ -3,12 +3,14 @@ package domain;
 import java.util.List;
 
 import javax.persistence.Column;
-import javax.persistence.Column;
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -25,13 +27,23 @@ public class Faculty {
 	@Column(name = "numberOfStudents")
 	private Integer numberOfStudents;
 
-	@ElementCollection
+	private String logoUrl;
+
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name = "faculty_subject", joinColumns = @JoinColumn(name = "faculty_id"), inverseJoinColumns = @JoinColumn(name = "subject_id"))
 	private List<Subject> subjects;
 
 	public Faculty() {
 	}
 
 	public Faculty(String name, Integer numberOfStudents, List<Subject> subjects) {
+		this.name = name;
+		this.numberOfStudents = numberOfStudents;
+		this.subjects = subjects;
+	}
+
+	public Faculty(Integer id, String name, Integer numberOfStudents, List<Subject> subjects) {
+		this.id = id;
 		this.name = name;
 		this.numberOfStudents = numberOfStudents;
 		this.subjects = subjects;
@@ -59,6 +71,14 @@ public class Faculty {
 
 	public void setNumberOfStudents(Integer numberOfStudents) {
 		this.numberOfStudents = numberOfStudents;
+	}
+
+	public String getLogoUrl() {
+		return logoUrl;
+	}
+
+	public void setLogoUrl(String logoUrl) {
+		this.logoUrl = logoUrl;
 	}
 
 	public List<Subject> getSubjects() {

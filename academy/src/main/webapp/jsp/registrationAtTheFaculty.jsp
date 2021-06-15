@@ -11,56 +11,81 @@
 <body>
 	<div class="container">
 
-<!-- Sidebar -->
+		<!-- Sidebar -->
 		<div class="w3-sidebar w3-light-grey w3-bar-block" style="width: 10%">
 			<h3 class="w3-bar-item">Menu</h3>
 			<a href="/home" class="w3-bar-item w3-button">Home</a>
 			<a href="/show-entrants" class="w3-bar-item w3-button">All entrants</a>
+			<a href="/admin_panel" class="w3-bar-item w3-button">Admin Panel</a>
+			<a href="/login?logout" class="w3-bar-item w3-button">Logout</a>
 		</div>
 
-<!-- Page Content -->
+		<!-- Page Content -->
+
 		<div style="margin-left: 10%">
-			<div class="w3-container w3-teal">
-				<h1>Registration at the faculty</h1>
+
+			<c:if test="${pageContext.request.userPrincipal.name != null}">
+				<form id="logoutForm" method="POST" action="${contextPath}/logout">
+					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+				</form>
+			</c:if>
+
+			<div class="w3-container w3-orange w3-center">
+				<h1>Registration at the faculty of ${registrationAtFaculty.faculty.name}</h1>
 			</div>
 
-			<div class="w3-container">
+			<div class="w3-container admin_panel">
+				<h2>Registration form</h2>
+				<form:form method="POST" action="${contextPath}/faculty_reg" modelAttribute="registrationForFaculty" enctype="multipart/form-data">
 
-				<form:form method="POST"
-					action="${contextPath}/registration-at-faculty"
-					modelAttribute="facultyRegistration">
-					<table>
-						<tr>
-							<th>To register for the faculty you have to fill marks from
-								such subjects:</th>
-						</tr>
+					<div class="column_wrapper" style="display: flex; flex-wrap: wrap">
+						<div class="column1" style="margin: 0px 20px 5px 20px">
+							<label > <strong>User email:</strong> </label>
+							<label >${pageContext.request.userPrincipal.name}</label><br>
 
-						<c:forEach items="${facultyRegistration.faculty.subjects}"
-							var="currentSubject">
-							<tr>
-								<td><form:label path="marks">${currentSubjects}</form:label></td>
-								<td><form:input path="marks" /></td>
-							</tr>
-						</c:forEach>
+							<label > <strong>First name:</strong> </label>
+							<label >${currentUser.firstName}</label><br>
 
-						<tr>
-							<td><form:input type="hidden" path="email"
-									value="${facultyRegistration.user.email}" /></td>
-						</tr>
-						<tr>
-							<td><input type="submit" value="Register" /></td>
-						</tr>
+							<label > <strong>Last name:</strong> </label>
+							<label >${currentUser.lastName}</label><br>
 
-					</table>
-					<input type="hidden" name="${_csrf.parameterName}"
-						value="${_csrf.token}" />
+							<label for="userPhoto"><strong>User photo</strong></label><br>
+							<input type="file" id="userPhoto" name="userPhoto" style="margin-top: 10px; margin-bottom: 10px"><br>
+							<label for="documentPhoto"><strong>User certificate scan image</strong></label><br>
+							<input type="file" id="documentPhoto" name="documentPhoto" style="margin-top: 10px; margin-bottom: 10px"><br>
+						</div>
+						<div class="column2" style="margin: 0px 20px 5px 20px">
+								<table>
+
+									<c:forEach items="${registrationForFaculty.faculty.subjects}" var="currentSubject">
+										<tr  style="height: 70px">
+											<td><form:label path="marks"><strong>The mark from subject  ${currentSubject}</strong> </form:label></td>
+											<td><form:input path="marks" /> </td>
+										</tr>
+
+									</c:forEach>
+									<tr>
+										<td><form:input type="hidden" path="facultyId"
+														value="${registrationForFaculty.faculty.id}" /></td>
+										<td><form:input type="hidden" path="email"
+														value="${registrationForFaculty.user.email}" /></td>
+									</tr>
+								</table>
+						</div>
+					</div>
+					<input type="submit" value="Register" style="margin-left: 20px; color: white; width: 250px;
+															margin-top: 10px; background-color: darkorange">
 				</form:form>
+				<br>
 			</div>
+
 		</div>
 
 	</div>
 	<!-- /container -->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 	<script src="${contextPath}/resources/js/bootstrap.min.js"></script>
+
 </body>
 </html>
