@@ -1,5 +1,8 @@
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 
@@ -26,6 +29,11 @@
 			<h3 class="w3-bar-item">Menu</h3>
 			<a href="/home" class="w3-bar-item w3-button">Home</a>
 			<a href="/show-entrants" class="w3-bar-item w3-button">All entrants</a>
+			
+			<security:authorize access="hasRole('ADMINISTRATOR')">
+        	<a href="/admin_panel" class="w3-bar-item w3-button">Admin Panel</a>
+        	</security:authorize>
+        	<a href="/login?logout" class="w3-bar-item w3-button">Logout</a>
 		</div>
 
 <!-- Page Content -->
@@ -61,9 +69,11 @@
 									<p>Number of students recruited: ${currentFaculty.numberOfStudents}</p>
 									<p>Necessary subjects for entry: ${currentFaculty.subjects}</p>
 								</div>
+								<security:authorize access="hasRole('USER')">
 								<a class="w3-button w3-block w3-dark-grey"
 									href="${contextPath}/registration-at-faculty?facultyId=${currentFaculty.id}&email=${pageContext.request.userPrincipal.name}">
 									Register</a>
+								</security:authorize>
 
 							</div>
 
