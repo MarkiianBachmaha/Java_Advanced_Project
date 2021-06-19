@@ -3,6 +3,8 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 
 <!DOCTYPE html>
@@ -17,34 +19,28 @@
 
     <title>Admin panel</title>
 
-    <link rel="stylesheet"
-          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <script
-            src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script
-            src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-    <script
-            src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </head>
 <body>
 <!-- Sidebar -->
     <div class="w3-sidebar w3-light-grey w3-bar-block" style="width: 10%">
-        <h3 class="w3-bar-item">Menu</h3>
-        <a href="/home" class="w3-bar-item w3-button">Home</a>
-        <a href="/show-entrants" class="w3-bar-item w3-button">All entrants</a>
+        <h3 class="w3-bar-item"><spring:message code="menu.menu"/></h3>
+        <a href="/home" class="w3-bar-item w3-button"><spring:message code="menu.home"/></a>
+        <a href="/show-entrants" class="w3-bar-item w3-button"><spring:message code="menu.entrants"/></a>
         <security:authorize access="hasRole('ADMINISTRATOR')">
-        <a href="/admin_panel" class="w3-bar-item w3-button">Admin Panel</a>
+        <a href="/admin_panel" class="w3-bar-item w3-button"><spring:message code="menu.adminpanel"/></a>
         </security:authorize>
-        <a href="/login?logout" class="w3-bar-item w3-button">Logout</a>
-<%--        <a onclick="document.forms['logoutForm'].submit()" class="w3-bar-item w3-button">Logout</a>--%>
+        <a href="/login?logout" class="w3-bar-item w3-button"><spring:message code="menu.logout"/></a>
     </div>
 
     <!-- Page Content -->
     <div style="margin-left: 10%">
         <div class="w3-container w3-red w3-center"  >
-            <h1>Admin Panel</h1>
+            <h1><spring:message code="admin.title"/></h1>
         </div>
 
         <div class="w3-container">
@@ -58,46 +54,38 @@
 
 
             <div class="w3-container admin_panel">
-                <h2>Add new Faculty</h2>
+                <h2><spring:message code="admin.new"/></h2>
                     <form:form method="POST" action="${contextPath}/add_faculty" enctype="multipart/form-data">
 
                         <div class="column_wrapper" style="display: flex; flex-wrap: wrap">
                             <div class="column1" style="margin: 0px 20px 5px 20px">
-                                <label for="facultyName">Faculty name</label><br>
+                                <label for="facultyName"><spring:message code="admin.faculty_name"/></label><br>
                                 <input type="text" id="facultyName" name="facultyName"><br>
-                                <label for="numberOfStudents">Number of students</label><br>
+                                <label for="numberOfStudents"><spring:message code="home.number_students"/></label><br>
                                 <input type="number" id="numberOfStudents" name="numberOfStudents" value="1"><br>
-                                <label for="facultyLogo">Faculty logo</label><br>
-                                <input type="file" id="facultyLogo" name="facultyLogo"><br>
+                                <label for="facultyLogo"><spring:message code="admin.logo"/></label><br>
+                                <input type="file" id="facultyLogo" name="facultyLogo" value=<spring:message code="admin.choose_file" />><br>
                             </div>
                             <div class="column2" style="margin: 0px 20px 5px 20px">
-                                <label for="firstSubject">First Subject:</label><br>
+                                <label for="firstSubject"><spring:message code="admin.sub1"/>:</label><br>
                                 <input type="text" id="firstSubject" name="firstSubject" value="Ukrainian" readonly><br>
-                                <label for="secondSubject">Second Subject:</label><br>
+                                <label for="secondSubject"><spring:message code="admin.sub2"/>:</label><br>
                                 <input type="text" id="secondSubject" name="secondSubject" value="Mathematics" readonly><br>
-                                <label for="thirdSubject">Third Subject:</label><br>
-<%--                                <input type="text" id="third_subject" name="third_subject">--%>
-                                <select name="thirdSubject" id="thirdSubject">
-                                    <option value="English">English</option>
-                                    <option value="Biology">Biology</option>
-                                    <option value="History">History</option>
-                                    <option value="Physics">Physics</option>
-                                    <option value="Chemistry">Chemistry</option>
-                                </select>
+                                <label for="thirdSubject"><spring:message code="admin.sub3"/>:</label><br>
                             </div>
                         </div>
                         <input type="submit" value="Submit" style="margin-left: 20px; color: white; width: 250px; background-color: darkred">
                     </form:form>
                 <br>
-                <h2>List of the Faculties: </h2>
+                <h2><spring:message code="admin.list"/>: </h2>
                 <table class="table table-bordered">
                     <thead>
                     <tr>
-                        <th>Faculty name</th>
-                        <th>Number of Students</th>
-                        <th>Subjects</th>
-                        <th>Logo</th>
-                        <th>Edit</th>
+                        <th><spring:message code="admin.faculty_name"/></th>
+                        <th><spring:message code="home.number_students"/></th>
+                        <th><spring:message code="admin.subjects"/></th>
+                        <th><spring:message code="photo"/></th>
+                        <th><spring:message code="admin.edit"/></th>
                     </tr>
                     </thead>
                     <tbody id="myTable">
@@ -110,7 +98,8 @@
                                 <td> <img
                                         src="${currentFaculty.logoUrl}"
                                         alt="Faculty logo" style="width: 100px"></td>
-                                <td> <%--<a href="#">Edit</a>  <br>--%><a href="#">Delete</a> </td>
+                                <td> <%--<a href="#">Edit</a>  <br>--%><a href="#"><spring:message code="admin.delete"/></a>
+                               </td>
                             </tr>
                         </c:forEach>
                     </c:if>
@@ -121,18 +110,7 @@
             </div>
         </div>
     </div>
-
-
 <!-- /container -->
-    <script>
-        $(document).ready(function () {
-            $("#myInput").on("keyup", function () {
-                var value = $(this).val().toLowerCase();
-                $("#myTable tr").filter(function () {
-                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-                });
-            });
-        });
-    </script>
+<script src="js/table.js"></script>
 </body>
 </html>

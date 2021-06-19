@@ -1,9 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
+<meta charset="UTF-8">
 <title>Not permitted</title>
 
 	<link href="${contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">
@@ -14,19 +15,19 @@
 	<div class="container">
 <!-- Sidebar -->
 		<div class="w3-sidebar w3-light-grey w3-bar-block" style="width: 10%">
-			<h3 class="w3-bar-item">Menu</h3>
-			<a href="/home" class="w3-bar-item w3-button">Home</a>
-			<a href="/show-entrants" class="w3-bar-item w3-button">All entrants</a>
+			<h3 class="w3-bar-item"><spring:message code="menu.menu"/></h3>
+			<a href="/home" class="w3-bar-item w3-button"><spring:message code="menu.home"/></a>
+			<a href="/show-entrants" class="w3-bar-item w3-button"><spring:message code="menu.entrants"/></a>
 			<security:authorize access="hasRole('ADMINISTRATOR')">
-				<a href="/admin_panel" class="w3-bar-item w3-button">Admin Panel</a>
+				<a href="/admin_panel" class="w3-bar-item w3-button"><spring:message code="menu.adminpanel"/></a>
 			</security:authorize>
-			<a href="/login?logout" class="w3-bar-item w3-button">Logout</a>
+			<a href="/login?logout" class="w3-bar-item w3-button"><spring:message code="menu.logout"/></a>
 		</div>
 
 		<div style="margin-left: 10%">
 			<!-- Page Content -->
 			<div class="w3-container w3-red w3-center">
-				<h3> You have no permission to access page!</h3>
+				<h3><spring:message code="page403.message"/></h3>
 			</div>
 			<br><br>
 			<div class="w3-container w3-center">

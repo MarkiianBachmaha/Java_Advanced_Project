@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -25,7 +25,7 @@
 	<div class="container">
 
 		<form:form method="POST" modelAttribute="userForm" class="form-signin">
-			<h2 class="form-signin-heading">Create your account</h2>
+			<h2 class="form-signin-heading"><spring:message code="registration.title"/></h2>
 
 			<spring:bind path="firstName">
 				<div class="form-group ${status.error ? 'has-error' : ''}">
@@ -68,7 +68,8 @@
 				</div>
 			</spring:bind>
 
-			<button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
+			<button class="btn btn-lg btn-primary btn-block" type="submit"><spring:message code="submit"/></button>
+			<h4 class="text-center"><a href="${contextPath}/login"><spring:message code="registration.back"/></a></h4>		
 		</form:form>
 
 	</div>
