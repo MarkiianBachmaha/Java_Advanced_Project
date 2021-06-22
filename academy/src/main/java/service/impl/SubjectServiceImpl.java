@@ -1,6 +1,7 @@
 package service.impl;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,18 +20,18 @@ public class SubjectServiceImpl implements SubjectService {
 	@Autowired
 	private SubjectRepository subjectRepository;
 
-	public void save(Subject subject) {
+	public Subject save(Subject subject) {
 		logger.info("Save subject: " + subject);
-		subjectRepository.save(subject);
+		return subjectRepository.save(subject);
 	}
 
-	public List<Subject> getAllFaculties() {
+	public List<Subject> findAll() {
 		logger.info("Get all faculties");
 		return subjectRepository.findAll();
 	}
 
-	public Subject findById(Integer id) {
+	public Optional<Subject> findById(Integer id) {
 		logger.info("Find subject by id: " + id);
-		return subjectRepository.findById(id).get();
+		return subjectRepository.findById(id);
 	}
 }

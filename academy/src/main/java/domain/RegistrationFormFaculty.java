@@ -32,6 +32,9 @@ public class RegistrationFormFaculty {
 	@ElementCollection
 	private List<Integer> marks;
 
+	@Column
+	private Integer sumMarks;
+
 	@Column(name = "upload_photo")
 	private String uploadPhoto;
 
@@ -55,7 +58,6 @@ public class RegistrationFormFaculty {
 	}
 
 	public RegistrationFormFaculty(Integer id, Faculty faculty, User user, List<Integer> marks) {
-		;
 		this.id = id;
 		this.faculty = faculty;
 		this.user = user;
@@ -126,6 +128,14 @@ public class RegistrationFormFaculty {
 		this.facultyId = facultyId;
 	}
 
+	public Integer getSumMarks() {
+		return sumMarks;
+	}
+
+	public void setSumMarks(Integer sumMarks) {
+		this.sumMarks = sumMarks;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -135,6 +145,7 @@ public class RegistrationFormFaculty {
 		result = prime * result + facultyId;
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((marks == null) ? 0 : marks.hashCode());
+		result = prime * result + ((sumMarks == null) ? 0 : sumMarks.hashCode());
 		result = prime * result + ((uploadDocument == null) ? 0 : uploadDocument.hashCode());
 		result = prime * result + ((uploadPhoto == null) ? 0 : uploadPhoto.hashCode());
 		result = prime * result + ((user == null) ? 0 : user.hashCode());
@@ -172,6 +183,11 @@ public class RegistrationFormFaculty {
 				return false;
 		} else if (!marks.equals(other.marks))
 			return false;
+		if (sumMarks == null) {
+			if (other.sumMarks != null)
+				return false;
+		} else if (!sumMarks.equals(other.sumMarks))
+			return false;
 		if (uploadDocument == null) {
 			if (other.uploadDocument != null)
 				return false;
@@ -193,7 +209,8 @@ public class RegistrationFormFaculty {
 	@Override
 	public String toString() {
 		return "RegistrationFormFaculty [id=" + id + ", faculty=" + faculty + ", user=" + user + ", marks=" + marks
-				+ ", uploadPhoto=" + uploadPhoto + ", uploadDocument=" + uploadDocument + ", email=" + email
-				+ ", facultyId=" + facultyId + "]";
+				+ ", sumMarks=" + sumMarks + ", uploadPhoto=" + uploadPhoto + ", uploadDocument=" + uploadDocument
+				+ ", email=" + email + ", facultyId=" + facultyId + "]";
 	}
+
 }

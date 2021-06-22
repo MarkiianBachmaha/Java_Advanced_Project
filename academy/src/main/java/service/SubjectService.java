@@ -1,14 +1,15 @@
 package service;
 
 import java.util.List;
+import java.util.Optional;
 
 import domain.Subject;
 
 public interface SubjectService {
 
-	public void save(Subject subject);
+	public Subject save(Subject subject);
 
-	public List<Subject> getAllFaculties();
+	public List<Subject> findAll();
 
-	public Subject findById(Integer id);
+	public Optional<Subject> findById(Integer id);
 }

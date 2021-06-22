@@ -34,21 +34,21 @@ public class User {
 	public User() {
 	}
 
-	public User(String email, String firstName, String lastName, String password, UserRole role) {
+	public User(String email, String firstName, String lastName, UserRole role, String password) {
 		this.email = email;
 		this.firstName = firstName;
 		this.lastName = lastName;
-		this.password = password;
 		this.role = role;
+		this.password = password;
 	}
 
-	public User(Integer id, String email, String firstName, String lastName, String password, UserRole role) {
+	public User(Integer id, String email, String firstName, String lastName, UserRole role, String password) {
 		this.id = id;
 		this.email = email;
 		this.firstName = firstName;
 		this.lastName = lastName;
-		this.password = password;
 		this.role = role;
+		this.password = password;
 	}
 
 	public User(User user) {

@@ -22,9 +22,6 @@ public class RegistrationAtFacultyDtoMapper {
 			User user, List<Integer> marks) throws IOException {
 
 		RegistrationFormFaculty registrationFormFaculty = new RegistrationFormFaculty();
-//        List<String> collect = subjects.stream().map(subject -> subject.getName()).collect(Collectors.toList());
-//        List<Subject> allByNameLike = subjectRepository.getAllByNameIn(collect);
-//        mapSubjects(subjects , allByNameLike);
 		registrationFormFaculty.setFaculty(faculty);
 		registrationFormFaculty.setUser(user);
 		registrationFormFaculty.setMarks(marks);

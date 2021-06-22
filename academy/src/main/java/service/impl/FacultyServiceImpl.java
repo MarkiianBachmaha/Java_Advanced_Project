@@ -1,6 +1,7 @@
 package service.impl;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,9 +20,9 @@ public class FacultyServiceImpl implements FacultyService {
 	@Autowired
 	private FacultyRepository facultyRepository;
 
-	public void save(Faculty faculty) {
+	public Faculty save(Faculty faculty) {
 		logger.info("Save faculty: " + faculty);
-		facultyRepository.save(faculty);
+		return facultyRepository.save(faculty);
 	}
 
 	public List<Faculty> getAllFaculties() {
@@ -29,8 +30,15 @@ public class FacultyServiceImpl implements FacultyService {
 		return facultyRepository.findAll();
 	}
 
-	public Faculty findById(Integer id) {
+	public Optional<Faculty> findById(Integer id) {
+
 		logger.info("Find faculty by id: " + id);
-		return facultyRepository.findById(id).get();
+		return facultyRepository.findById(id);
+	}
+
+	@Override
+	public void deleteById(Integer id) {
+		logger.info("Delete faculty by id: " + id);
+		facultyRepository.deleteById(id);
 	}
 }

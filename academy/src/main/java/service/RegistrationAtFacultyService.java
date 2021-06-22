@@ -6,7 +6,7 @@ import domain.RegistrationFormFaculty;
 
 public interface RegistrationAtFacultyService {
 
-	public void save(RegistrationFormFaculty facultyRegistration);
+	public RegistrationFormFaculty save(RegistrationFormFaculty facultyRegistration);
 
 	public List<RegistrationFormFaculty> showAllEntrants();
 }

@@ -2,11 +2,12 @@ package domain;
 
 import java.util.List;
 
-import javax.persistence.ElementCollection;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -17,9 +18,10 @@ public class Subject {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
 
+	@Column
 	private String name;
 
-	@ElementCollection
+	@ManyToMany()
 	private List<Faculty> faculties;
 
 	public Subject() {

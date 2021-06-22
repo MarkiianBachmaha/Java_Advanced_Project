@@ -1,5 +1,8 @@
 package service.impl;
 
+import java.util.List;
+import java.util.Optional;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,16 +25,32 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	private PasswordEncoder bCryptPasswordEncoder;
 
-	public void save(User user) {
+	public User save(User user) {
 		user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
 		user.setPassword(bCryptPasswordEncoder.encode(user.getPasswordConfirm()));
 		user.setRole(UserRole.USER);
 		logger.info("Save new user: " + user);
-		userRepository.save(user);
+		return userRepository.save(user);
 	}
 
-	public User findByEmail(String email) {
-		logger.info("Find user by email: " + email);
-		return userRepository.findByEmail(email).get();
+	public Optional<User> findByEmail(String email) {
+		logger.info("Find user{} by email (" + email + ")");
+		return userRepository.findByEmail(email);
+	}
+
+	@Override
+	public Optional<User> findById(Integer id) {
+		logger.info("Find user by id (" + id + ")");
+		return userRepository.findById(id);
+	}
+
+	@Override
+	public List<User> findAll() {
+		return userRepository.findAll();
+	}
+
+	@Override
+	public void deleteById(Integer id) {
+		userRepository.deleteById(id);
 	}
 }

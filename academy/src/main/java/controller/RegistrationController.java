@@ -39,8 +39,8 @@ public class RegistrationController {
 	@GetMapping("/registration_at_faculty")
 	public ModelAndView registrationAtFaculty(@RequestParam("facultyId") Integer id,
 			@RequestParam("email") String email) {
-		Faculty faculty = facultyService.findById(id);
-		User user = userService.findByEmail(email);
+		Faculty faculty = facultyService.findById(id).get();
+		User user = userService.findByEmail(email).get();
 		RegistrationFormFaculty registrationAtFaculty = new RegistrationFormFaculty();
 		registrationAtFaculty.setFaculty(faculty);
 		registrationAtFaculty.setUser(user);
@@ -55,8 +55,8 @@ public class RegistrationController {
 			@Validated @ModelAttribute("registrationAtFaculty") RegistrationFormFaculty registrationAtFaculty,
 			@RequestParam MultipartFile userPhoto, @RequestParam MultipartFile documentPhoto,
 			BindingResult bindingResult) throws IOException {
-		Faculty faculty = facultyService.findById(registrationAtFaculty.getFacultyId());
-		User user = userService.findByEmail(registrationAtFaculty.getEmail());
+		Faculty faculty = facultyService.findById(registrationAtFaculty.getFacultyId()).get();
+		User user = userService.findByEmail(registrationAtFaculty.getEmail()).get();
 		registrationAtFaculty.setFaculty(faculty);
 		registrationAtFaculty.setUser(user);
 		RegistrationFormFaculty entity = registrationAtFacultyDtoMapper.createEntity(userPhoto, documentPhoto, faculty,

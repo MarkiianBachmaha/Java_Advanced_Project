@@ -19,9 +19,9 @@ public class RegistrationAtFacultyServiceImpl implements RegistrationAtFacultySe
 	@Autowired
 	private RegistrationFormRepository registrationFormRepository;
 
-	public void save(RegistrationFormFaculty facultyRegistration) {
+	public RegistrationFormFaculty save(RegistrationFormFaculty facultyRegistration) {
 		logger.info("Create new registration at faculty: " + facultyRegistration);
-		registrationFormRepository.save(facultyRegistration);
+		return registrationFormRepository.save(facultyRegistration);
 	}
 
 	public List<RegistrationFormFaculty> showAllEntrants() {
